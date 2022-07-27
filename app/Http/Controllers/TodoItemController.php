@@ -9,7 +9,7 @@ class TodoItemController extends Controller
 {
     public function index()
     {
-        $items = Item::all()->sortBy('created_at');
+        $items = Item::all()->sortBy('created_at')->where('user_id', auth()->user()->id);
         return view('dashboard', ['items' => $items]);
     }
 
@@ -17,6 +17,7 @@ class TodoItemController extends Controller
         $newItem = new Item();
         $newItem->name = $request->itemName;
         $newItem->completed = false;
+        $newItem->user_id = auth()->user()->id;
         $newItem->save();
         return redirect()->route('home');
     }
