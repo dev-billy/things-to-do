@@ -11,4 +11,9 @@ Route::get('/addItem', function () {
 
 Route::post('/saveItem', [TodoItemController::class, 'saveItem'])->middleware(['auth'])->name('saveItem');
 
+Route::patch('/updateItem', [TodoItemController::class, 'updateItem'])->middleware(['auth'])->name('updateItem');
+
+//TODO: update the verb to delete
+Route::get('/deleteItem/${id}', [TodoItemController::class, 'deleteItem'])->middleware(['auth'])->name('deleteItem');
+
 require __DIR__.'/auth.php';
